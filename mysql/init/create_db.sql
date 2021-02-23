@@ -1,0 +1,16 @@
+DROP DATABASE IF EXISTS `knex-db`;
+CREATE DATABASE `knex-db`;
+USE `knex-db`;
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `user_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` TEXT NOT NULL,
+  `email` TEXT,
+  `password` TEXT,
+  `create_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `version` INT(11) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`user_id`)
+);
+

@@ -1,0 +1,15 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_DATABASE=knex-db
+      - MYSQL_ROOT_PASSWORD=passw0rd
+      - TZ=Asia/Tokyo
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/init:/docker-entrypoint-initdb.d # コンテナ起動時にSQLを発行
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf # 設定ファイルをバインド
+    networks:
+      - default

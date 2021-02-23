@@ -8,5 +8,5 @@ const port = 3000;
 app.use("/user", user);
 
 app.listen(port, () => {
-  console.log("start");
+  console.log(`Running on http://localhost:${port}`);
 });

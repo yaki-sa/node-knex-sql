@@ -4,3 +4,6 @@ node_modules/
 # rest client 
 *.http
 *.rest
+
+# docker
+data/
