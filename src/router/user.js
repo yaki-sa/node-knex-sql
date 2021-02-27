@@ -5,14 +5,43 @@ const knex = require("../knex/knex.js");
 // require("dotenv").config({ path: ENV_PATH });
 
 router.get("/", (req, res) => {
-  console.log(process.env.DB_HOST);
   knex
     .select("*")
     .from("users")
     .then(async (rows) => {
       await console.log("rows: ", rows);
     });
-  res.send("/userで実行");
+  res.send("GET /userで実行");
+});
+
+router.post("/", (req, res) => {
+  knex("users")
+    .insert(req.body)
+    .then((result) => {
+      console.log("result: ", result);
+    });
+  res.send("POST /userで実行");
+});
+
+router.put("/", (req, res) => {
+  knex("users")
+    .update(req.body)
+    .where("user_id", req.body.user_id)
+    .then((result) => {
+      console.log("result: ", result);
+    });
+  res.send("PUT /userで実行");
+});
+
+router.delete("/:id", (req, res) => {
+  console.log(req.params.id);
+  knex("users")
+    .del()
+    .where("user_id", req.params.id)
+    .then((result) => {
+      console.log("result: ", result);
+    });
+  res.send("DELETE /userで実行");
 });
 
 module.exports = router;
