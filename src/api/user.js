@@ -1,16 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const knex = require("../knex/knex.js");
+const userService = require("../services/user");
 // const ENV_PATH = path.join(__dirname, ".env");
 // require("dotenv").config({ path: ENV_PATH });
 
 router.get("/", (req, res) => {
-  knex
-    .select("*")
-    .from("users")
-    .then(async (rows) => {
-      await console.log("rows: ", rows);
-    });
+  userService.getAllUsers(req);
   res.send("GET /userで実行");
 });
 

@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 
-const user = require("./router/user");
+const user = require("./api/user");
 const port = 3000;
 
 app.use(
