@@ -6,6 +6,17 @@ module.exports = {
     knex
       .select("*")
       .from("users")
+      .where((builder) => {
+        if (req.query.user_id) {
+          builder.where("user_id", req.query.user_id);
+        }
+        if (req.query.name) {
+          builder.where("name", req.query.name);
+        }
+        if (req.query.email) {
+          builder.where("email", req.query.email);
+        }
+      })
       .then(async (rows) => {
         await console.log("rows: ", rows);
       });
