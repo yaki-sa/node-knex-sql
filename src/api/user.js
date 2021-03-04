@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const knex = require("../knex/knex.js");
 const userService = require("../services/user");
+const { validationResult } = require("express-validator");
+
+const userCreateValidator = require("../validators/userCreateValidator");
 // const ENV_PATH = path.join(__dirname, ".env");
 // require("dotenv").config({ path: ENV_PATH });
 
@@ -16,7 +19,12 @@ router.get("/:id", (req, res) => {
   res.send(`GET /user/${user_id}で実行`);
 });
 
-router.post("/", (req, res) => {
+router.post("/", userCreateValidator, (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
   userService.postUser(req);
   res.send("POST /userで実行");
 });
