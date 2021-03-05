@@ -1,4 +1,7 @@
 const userRepository = require("../repositorys/user");
+const bcrypt = require("bcrypt");
+
+const saltRounds = 10;
 
 module.exports = {
   getAllUsers: (req) => {
@@ -8,9 +11,11 @@ module.exports = {
     userRepository.select(user_id);
   },
   postUser: (req) => {
+    req.body.password = bcrypt.hashSync(req.body.password, saltRounds);
     userRepository.insert(req);
   },
   putUser: (req) => {
+    req.body.password = bcrypt.hashSync(req.body.password, saltRounds);
     userRepository.update(req);
   },
   deleteUser: (user_id) => {
