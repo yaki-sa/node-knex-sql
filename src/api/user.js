@@ -5,6 +5,7 @@ const userService = require("../services/user");
 const { validationResult } = require("express-validator");
 
 const userCreateValidator = require("../validators/userCreateValidator");
+const userUpdateValidator = require("../validators/userUpdateValidator");
 // const ENV_PATH = path.join(__dirname, ".env");
 // require("dotenv").config({ path: ENV_PATH });
 
@@ -24,12 +25,15 @@ router.post("/", userCreateValidator, (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() });
   }
-
   userService.postUser(req);
   res.send("POST /userで実行");
 });
 
-router.put("/", (req, res) => {
+router.put("/", userUpdateValidator, (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
   userService.putUser(req);
   res.send("PUT /userで実行");
 });
