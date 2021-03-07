@@ -1,8 +1,12 @@
 const { select } = require("../knex/knex.js");
 const knex = require("../knex/knex.js");
+const { attachPaginate } = require("knex-paginate");
+attachPaginate();
 
 module.exports = {
   selectAll: (req) => {
+    const page = req.query.page;
+
     knex
       .select("*")
       .from("users")
@@ -16,6 +20,10 @@ module.exports = {
         if (req.query.email) {
           builder.where("email", req.query.email);
         }
+      })
+      .paginate({
+        perPage: 2,
+        currentPage: page,
       })
       .then(async (rows) => {
         await console.log("rows: ", rows);
