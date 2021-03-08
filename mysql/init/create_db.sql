@@ -14,3 +14,15 @@ CREATE TABLE `users` (
   PRIMARY KEY (`user_id`)
 );
 
+DROP TABLE IF EXISTS `posts`;
+CREATE TABLE `posts` (
+  `post_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `title`  VARCHAR(25) NOT NULL,
+  `contents` TEXT NOT NULL,
+  `poster_id` INT(11) NOT NULL,
+  `create_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `version` INT(11) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`post_id`)
+);
+

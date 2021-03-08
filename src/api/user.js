@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const knex = require("../knex/knex.js");
 const userService = require("../services/user");
 const { validationResult } = require("express-validator");
 

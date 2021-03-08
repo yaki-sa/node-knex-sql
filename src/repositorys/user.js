@@ -1,4 +1,3 @@
-const { select } = require("../knex/knex.js");
 const knex = require("../knex/knex.js");
 const { attachPaginate } = require("knex-paginate");
 attachPaginate();
