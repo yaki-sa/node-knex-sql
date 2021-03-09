@@ -26,6 +26,7 @@ module.exports = {
     knex
       .select("*")
       .from("posts")
+      .leftJoin("users", "posts.poster_id", "users.user_id")
       .where("post_id", post_id)
       .then(async (rows) => {
         await console.log("rows: ", rows);
@@ -34,6 +35,22 @@ module.exports = {
   insert: (req) => {
     knex("posts")
       .insert(req.body)
+      .then((result) => {
+        console.log("result: ", result);
+      });
+  },
+  update: (req) => {
+    knex("posts")
+      .update(req.body)
+      .where("post_id", req.body.post_id)
+      .then((result) => {
+        console.log("result: ", result);
+      });
+  },
+  delete: (post_id) => {
+    knex("posts")
+      .del()
+      .where("post_id", post_id)
       .then((result) => {
         console.log("result: ", result);
       });

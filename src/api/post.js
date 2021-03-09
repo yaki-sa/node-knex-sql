@@ -18,4 +18,15 @@ router.post("/", (req, res) => {
   res.send("POST /postで実行");
 });
 
+router.put("/", (req, res) => {
+  postService.putPost(req);
+  res.send("PUT /postで実行");
+});
+
+router.delete("/:id", (req, res) => {
+  const post_id = req.params.id;
+  postService.deletePost(post_id);
+  res.send("DELETE /postで実行");
+});
+
 module.exports = router;

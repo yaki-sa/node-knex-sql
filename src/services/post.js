@@ -10,4 +10,10 @@ module.exports = {
   postPost: (req) => {
     postRepository.insert(req);
   },
+  putPost: (req) => {
+    postRepository.update(req);
+  },
+  deletePost: (post_id) => {
+    postRepository.delete(post_id);
+  },
 };
