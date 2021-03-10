@@ -22,14 +22,15 @@ module.exports = {
         await console.log("rows: ", rows);
       });
   },
-  select: (post_id) => {
-    knex
+  select: async (post_id) => {
+    await knex
       .select("*")
       .from("posts")
       .leftJoin("users", "posts.poster_id", "users.user_id")
       .where("post_id", post_id)
-      .then(async (rows) => {
-        await console.log("rows: ", rows);
+      .then(async (row) => {
+        await console.log("rows: ", row);
+        return await row;
       });
   },
   insert: (req) => {
