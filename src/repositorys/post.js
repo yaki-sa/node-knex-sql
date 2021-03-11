@@ -23,15 +23,17 @@ module.exports = {
       });
   },
   select: async (post_id) => {
+    let data = null;
     await knex
       .select("*")
       .from("posts")
       .leftJoin("users", "posts.poster_id", "users.user_id")
       .where("post_id", post_id)
-      .then(async (row) => {
-        await console.log("rows: ", row);
-        return await row;
+      .then((row) => {
+        data = row;
       });
+    console.log("data: ", data);
+    return data;
   },
   insert: (req) => {
     knex("posts")

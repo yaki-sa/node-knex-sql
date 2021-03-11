@@ -7,26 +7,23 @@ module.exports = {
   },
   getPost: async (post_id) => {
     const data = await postRepository.select(post_id);
-    console.log(data);
-    if (!data) {
-      console.log(data);
-
+    if (!data.length) {
       throw new NoDataFoundException("対象のデータがありませんでした。", 1001);
     }
   },
   postPost: (req) => {
     postRepository.insert(req);
   },
-  putPost: (req) => {
-    const data = postRepository.select(post_id);
-    if (!data) {
+  putPost: async (req) => {
+    const data = await postRepository.select(post_id);
+    if (!data.length) {
       throw new NoDataFoundException("対象のデータがありませんでした。", 1001);
     }
     postRepository.update(req);
   },
-  deletePost: (post_id) => {
-    const data = postRepository.select(post_id);
-    if (!data) {
+  deletePost: async (post_id) => {
+    const data = await postRepository.select(post_id);
+    if (!data.length) {
       throw new NoDataFoundException("対象のデータがありませんでした。", 1001);
     }
     postRepository.delete(post_id);

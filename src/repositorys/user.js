@@ -28,14 +28,17 @@ module.exports = {
         await console.log("rows: ", rows);
       });
   },
-  select: (user_id) => {
-    knex
+  select: async (user_id) => {
+    let data = null;
+    await knex
       .select("*")
       .from("users")
       .where("user_id", user_id)
-      .then(async (rows) => {
-        await console.log("rows: ", rows);
+      .then((row) => {
+        data = row;
       });
+    console.log("data: ", data);
+    return data;
   },
   insert: (req) => {
     knex("users")
