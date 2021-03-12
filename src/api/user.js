@@ -13,9 +13,14 @@ router.get("/", (req, res) => {
   res.send("GET /userで実行");
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
   const user_id = req.params.id;
-  userService.getUser(user_id);
+  try {
+    await userService.getUser(user_id);
+  } catch (error) {
+    return res.status(400).json({ error: error.toString() });
+  }
+
   res.send(`GET /user/${user_id}で実行`);
 });
 
