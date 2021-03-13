@@ -5,8 +5,6 @@ const { validationResult } = require("express-validator");
 
 const userCreateValidator = require("../validators/userCreateValidator");
 const userUpdateValidator = require("../validators/userUpdateValidator");
-// const ENV_PATH = path.join(__dirname, ".env");
-// require("dotenv").config({ path: ENV_PATH });
 
 router.get("/", (req, res) => {
   userService.getAllUsers(req);
